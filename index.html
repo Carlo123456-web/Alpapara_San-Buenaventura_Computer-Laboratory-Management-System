@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICTC Computer Unit Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="homePage">
+
+    <header>
+      <img src="school-logo.png" class="school-logo"
+           alt="Pasig Catholic College Logo"
+           onerror="this.style.display='none'">
+
+      <div>
+        <h1>ICTC Computer Unit Management System</h1>
+        <p>Pasig Catholic College</p>
+      </div>
+    </header>
+
+    <main class="home">
+      <h2>Select a Laboratory</h2>
+      <p>Check laboratory availability and see which professor is using each room.</p>
+
+      <div id="roomList" class="rooms"></div>
+    </main>
+
+  </div>
+
+
+  <div id="computerPage" style="display:none">
+
+    <header>
+      <img src="school-logo.png" class="school-logo"
+           alt="Pasig Catholic College Logo"
+           onerror="this.style.display='none'">
+
+      <div>
+        <button class="back" onclick="goHome()">← Back to Laboratories</button>
+
+        <h1 id="roomTitle">Computer Laboratory</h1>
+        <p>Pasig Catholic College - ICTC</p>
+      </div>
+    </header>
+
+
+    <main class="main">
+
+      <section class="cards">
+
+        <div class="card">
+          <p>Total Computers</p>
+          <h2 id="total">0</h2>
+        </div>
+
+        <div class="card">
+          <p>Available</p>
+          <h2 id="available">0</h2>
+        </div>
+
+        <div class="card">
+          <p>Unavailable</p>
+          <h2 id="unavailable">0</h2>
+        </div>
+
+        <div class="card">
+          <p>Maintenance</p>
+          <h2 id="maintenance">0</h2>
+        </div>
+
+      </section>
+
+
+      <section class="box">
+
+        <div class="box-header">
+          <h2>Computer Units</h2>
+          <button onclick="openAddForm()">+ Add Computer</button>
+        </div>
+
+        <input type="text"
+               id="search"
+               placeholder="Search by ID, processor, status..."
+               oninput="showComputers()">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Processor</th>
+                <th>RAM</th>
+                <th>Storage</th>
+                <th>Status</th>
+                <th>Maintenance</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="computerList"></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <section class="box maintenance-box">
+
+        <h2>Problem and Maintenance Records</h2>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Computer ID</th>
+                <th>Problem</th>
+                <th>Date Reported</th>
+                <th>Reported By</th>
+                <th>Action Taken</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="maintenanceList"></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- ADD / EDIT COMPUTER FORM -->
+
+  <div id="formBackground" class="form-background">
+
+    <div class="form-box">
+
+      <h2 id="formTitle">Add Computer Unit</h2>
+
+      <form id="computerForm">
+
+        <label for="computerId">Computer ID</label>
+        <input id="computerId"
+               required
+               placeholder="Example: PC-006">
+
+
+        <label for="processor">Processor</label>
+        <input id="processor"
+               required
+               placeholder="Example: Intel i5">
+
+
+        <label for="ram">RAM</label>
+        <input id="ram"
+               required
+               placeholder="Example: 8 GB">
+
+
+        <label for="storage">Storage</label>
+        <input id="storage"
+               required
+               placeholder="Example: 512 GB SSD">
+
+
+        <label for="status">Status</label>
+
+        <select id="status">
+          <option>Available</option>
+          <option>Unavailable</option>
+        </select>
+
+
+        <label for="maintenance">Maintenance</label>
+
+        <select id="maintenance">
+          <option>Good</option>
+          <option>For Maintenance</option>
+          <option>Under Repair</option>
+        </select>
+
+
+        <div class="form-buttons">
+
+          <button type="button"
+                  class="cancel"
+                  onclick="closeForm()">
+            Cancel
+          </button>
+
+          <button type="submit">
+            Save Computer
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- REPORT PROBLEM FORM -->
+
+  <div id="problemBackground" class="form-background">
+
+    <div class="form-box">
+
+      <h2 id="problemFormTitle">Report Computer Problem</h2>
+
+      <form id="problemForm">
+
+        <label for="problemComputerId">Computer ID</label>
+
+        <input id="problemComputerId"
+               readonly>
+
+
+        <label for="problemDescription">Problem</label>
+
+        <textarea id="problemDescription"
+                  required
+                  placeholder="Describe the problem..."></textarea>
+
+
+        <label for="dateReported">Date Reported</label>
+
+        <input type="date"
+               id="dateReported"
+               required>
+
+
+        <label for="reportedBy">Reported By</label>
+
+        <select id="reportedBy">
+          <option>Teacher</option>
+          <option>Student</option>
+          <option>ICTC Personnel</option>
+        </select>
+
+
+        <label for="problemMaintenance">Maintenance Status</label>
+
+        <select id="problemMaintenance">
+          <option>For Maintenance</option>
+          <option>Under Repair</option>
+          <option>Good</option>
+        </select>
+
+
+        <label for="actionTaken">Action Taken</label>
+
+        <textarea id="actionTaken"
+                  placeholder="Enter action taken..."></textarea>
+
+
+        <div class="form-buttons">
+
+          <button type="button"
+                  class="cancel"
+                  onclick="closeProblemForm()">
+            Cancel
+          </button>
+
+          <button type="submit">
+            Save Report
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- MARK LABORATORY AS IN USE FORM -->
+
+  <div id="roomBackground" class="form-background">
+
+    <div class="form-box">
+
+      <h2>Mark Laboratory as In Use</h2>
+
+      <form id="roomForm">
+
+        <label for="roomProfessor">Professor Name</label>
+
+        <input type="text"
+               id="roomProfessor"
+               required
+               placeholder="Enter professor name">
+
+
+        <label for="roomClass">Class / Subject</label>
+
+        <input type="text"
+               id="roomClass"
+               required
+               placeholder="Enter class or subject">
+
+
+        <div class="form-buttons">
+
+          <button type="button"
+                  class="cancel"
+                  onclick="closeRoomForm()">
+            Cancel
+          </button>
+
+          <button type="submit">
+            Mark as In Use
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>

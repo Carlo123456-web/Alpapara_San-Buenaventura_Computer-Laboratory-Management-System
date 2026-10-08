@@ -1,0 +1,81 @@
+
+{
+  "rooms": [
+    {
+      "name": "Room 405",
+      "status": "Available",
+      "professor": "",
+      "class": ""
+    },
+    {
+      "name": "Room 406",
+      "status": "In Use",
+      "professor": "",
+      "class": ""
+    },
+    {
+      "name": "Room 407",
+      "status": "Available",
+      "professor": "",
+      "class": ""
+    }
+  ],
+  "computers": [
+    {
+      "room": "Room 405",
+      "id": "PC-001",
+      "processor": "Intel i5",
+      "ram": "8 GB",
+      "storage": "512 GB SSD",
+      "status": "Available",
+      "maintenance": "Good"
+    },
+    {
+      "room": "Room 405",
+      "id": "PC-002",
+      "processor": "Intel i3",
+      "ram": "8 GB",
+      "storage": "256 GB SSD",
+      "status": "Unavailable",
+      "maintenance": "Good"
+    },
+    {
+      "room": "Room 406",
+      "id": "PC-003",
+      "processor": "Intel i5",
+      "ram": "16 GB",
+      "storage": "512 GB SSD",
+      "status": "Available",
+      "maintenance": "Good"
+    },
+    {
+      "room": "Room 406",
+      "id": "PC-004",
+      "processor": "Ryzen 5",
+      "ram": "16 GB",
+      "storage": "1 TB SSD",
+      "status": "Unavailable",
+      "maintenance": "Under Repair"
+    },
+    {
+      "room": "Room 407",
+      "id": "PC-005",
+      "processor": "Intel i5",
+      "ram": "8 GB",
+      "storage": "512 GB SSD",
+      "status": "Available",
+      "maintenance": "Good"
+    }
+  ],
+  "maintenanceRecords": [
+    {
+      "room": "Room 406",
+      "computerId": "PC-004",
+      "problem": "Computer is not starting.",
+      "dateReported": "2026-10-07",
+      "reportedBy": "Teacher",
+      "actionTaken": "Computer is being checked by ICTC.",
+      "status": "Under Repair"
+    }
+  ]
+}
